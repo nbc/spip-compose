@@ -1,0 +1,30 @@
+version: "3.7"
+services:
+  db:
+    image: mariadb:10.5.1
+    environment:
+      MYSQL_DATABASE: spip
+      MYSQL_USER: spip
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD:-spip}"
+    volumes:
+      - mariadb:/var/lib/mysql
+
+  spip:
+    image: ipeos/spip:3.2
+    ports:
+      - "${SPIP_PORT:-8080}:80"
+    depends_on:
+      - db
+    environment:
+      SPIP_DB_HOST: db
+      SPIP_DB_NAME: spip
+      SPIP_DB_LOGIN: spip
+      SPIP_DB_PASS: "${MYSQL_PASSWORD:-spip}"
+      SPIP_ADMIN_PASS: "${SPIP_ADMIN_PASS:-adminadmin}"
+      SPIP_ADMIN_NAME: "${SPIP_ADMIN_NAME:-Admin}"
+      SPIP_ADMIN_LOGIN: "${SPIP_ADMIN_LOGIN:-admin}"
+      SPIP_ADMIN_EMAIL: "${SPIP_ADMIN_EMAIL:-admin@spip}"
+
+volumes:
+  mariadb:
