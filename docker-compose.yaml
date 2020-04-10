@@ -23,6 +23,13 @@ services:
       SPIP_ADMIN_NAME: "${SPIP_ADMIN_NAME:-Admin}"
       SPIP_ADMIN_LOGIN: "${SPIP_ADMIN_LOGIN:-admin}"
       SPIP_ADMIN_EMAIL: "${SPIP_ADMIN_EMAIL:-admin@spip}"
+    volumes:
+      - ./mounts/spip/IMG:/var/www/html/IMG/
+      - ./mounts/spip/plugins/:/var/www/html/plugins/
+      - ./mounts/spip/lib/:/var/www/html/lib/
+      - ./mounts/spip/tmp/:/var/www/html/tmp/
+      - ./mounts/spip/local/:/var/www/html/local/
+      - ./mounts/spip/htaccess:/var/www/html/.htaccess
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
