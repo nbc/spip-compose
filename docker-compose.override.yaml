@@ -1,0 +1,10 @@
+version: "3.7"
+services:
+
+  spip:
+    ports:
+      - "8080:80"
+
+  phpmyadmin:
+    ports:
+      - "8090:80"

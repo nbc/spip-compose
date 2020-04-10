@@ -31,7 +31,10 @@ Si vous comptez ouvrir cet environnement sur internet, copiez le
 fichier `.env.example` vers `.env` et modifiez au moins la variable :
 * `SPIP_ADMIN_PASS`
 
+# utiliser l'environnement
 
+* SPIP est disponible sur localhost:8080
+* phpmyadmin sur localhost:8090
 
 # Références
 
