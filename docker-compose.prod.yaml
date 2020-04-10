@@ -1,0 +1,65 @@
+version: "3.7"
+
+services:
+  traefik:
+    image: "traefik:v2.2"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:444"
+
+      - "--log.filePath=/var/log/traefik.log"
+      - "--log.level=DEBUG"
+
+      - "--accesslog=true"
+      - "--accesslog.filepath=/var/log/access.log"
+      - "--accesslog.bufferingsize=100"
+    ports:
+      - "444:444"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - ./mounts/traefik_logs:/var/log/
+    networks:
+      - traefik
+    labels:
+      - "traefik.enable=true"
+
+      - "traefik.http.routers.api.rule=Host(`traefik-${COMPOSE_PROJECT_NAME}.${DOMAIN_NAME:-recette.tech}`)"
+      - "traefik.http.routers.api.service=api@internal"
+      - "traefik.docker.network=${COMPOSE_PROJECT_NAME}_traefik"
+
+      - "traefik.http.routers.api.middlewares=auth-traefik"
+      - "traefik.http.middlewares.auth-traefik.basicauth.users=user:$$apr1$$ctVuEW.e$$Vt7B/2lNvdumzefJ0YhYa/"
+
+  spip:
+    networks:
+      - db
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.spip.rule=Host(`${COMPOSE_PROJECT_NAME}.${DOMAIN_NAME:-recette.tech}`)"
+      - "traefik.http.routers.spip.entrypoints=web"
+      - "traefik.http.routers.spip.service=spip"
+      - "traefik.http.services.spip.loadbalancer.server.port=80"
+      - "traefik.docker.network=${COMPOSE_PROJECT_NAME}_traefik"
+
+  phpmyadmin:
+    networks:
+      - db
+      - traefik
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pma.rule=Host(`pma-${COMPOSE_PROJECT_NAME}.${DOMAIN_NAME:-recette.tech}`)"
+      - "traefik.http.routers.pma.entrypoints=web"
+      - "traefik.http.routers.pma.service=pma"
+      - "traefik.http.services.pma.loadbalancer.server.port=80"
+      - "traefik.docker.network=${COMPOSE_PROJECT_NAME}_traefik"
+
+  db:
+    networks:
+      - db
+
+networks:
+  traefik:
+  db:
