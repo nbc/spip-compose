@@ -1,7 +1,7 @@
 Ce dépôt permet de démarrer très rapidement un *environnement de
 développement* pour spip 3.2 avec une base mariadb 10.5.
 
-# Démarrage rapide
+# Démarrage rapide en mode développement local
 
 Les commandes de bases :
 
@@ -21,6 +21,19 @@ docker-compose down
 docker volume rm spip-compose_mariadb
 ```
 
+## utiliser l'environnement
+
+* SPIP est disponible sur localhost:8080
+* phpmyadmin sur localhost:8090
+
+# Démarrage d'un environnement en production
+
+
+
+```
+docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml down
+```
+
 # configurer l'environnement
 
 Par défaut l'environnement est disponible sur l'url
@@ -31,10 +44,6 @@ Si vous comptez ouvrir cet environnement sur internet, copiez le
 fichier `.env.example` vers `.env` et modifiez au moins la variable :
 * `SPIP_ADMIN_PASS`
 
-# utiliser l'environnement
-
-* SPIP est disponible sur localhost:8080
-* phpmyadmin sur localhost:8090
 
 # Références
 

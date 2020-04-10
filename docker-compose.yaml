@@ -5,8 +5,8 @@ services:
     environment:
       MYSQL_DATABASE: spip
       MYSQL_USER: spip
-      MYSQL_PASSWORD: "${MYSQL_PASSWORD:-Averylongpasswordtochange}"
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-Averylongpasswordtochange}"
+      MYSQL_PASSWORD: "${SPIP_DB_PASS:-changez_moi}"
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
     volumes:
       - mariadb:/var/lib/mysql
 
@@ -18,25 +18,24 @@ services:
       SPIP_DB_HOST: db
       SPIP_DB_NAME: spip
       SPIP_DB_LOGIN: spip
-      SPIP_DB_PASS: "${MYSQL_PASSWORD:-Averylongpasswordtochange}"
-      SPIP_ADMIN_PASS: "${SPIP_ADMIN_PASS:-Averylongpasswordtochange}"
+      SPIP_DB_PASS: "${SPIP_DB_PASS:-changez_moi}"
+
+      SPIP_ADMIN_PASS: "${SPIP_ADMIN_PASS:-changez_moi}"
       SPIP_ADMIN_NAME: "${SPIP_ADMIN_NAME:-Admin}"
       SPIP_ADMIN_LOGIN: "${SPIP_ADMIN_LOGIN:-admin}"
       SPIP_ADMIN_EMAIL: "${SPIP_ADMIN_EMAIL:-admin@spip}"
     volumes:
-      - ./mounts/spip/IMG:/var/www/html/IMG/
-      - ./mounts/spip/plugins/:/var/www/html/plugins/
-      - ./mounts/spip/lib/:/var/www/html/lib/
-      - ./mounts/spip/tmp/:/var/www/html/tmp/
-      - ./mounts/spip/local/:/var/www/html/local/
-      - ./mounts/spip/htaccess:/var/www/html/.htaccess
+      - ./mounts/IMG:/var/www/html/IMG/
+      - ./mounts/plugins/:/var/www/html/plugins/
+      - ./mounts/lib/:/var/www/html/lib/
+      - ./mounts/tmp/:/var/www/html/tmp/
+      - ./mounts/local/:/var/www/html/local/
+      - ./mounts/htaccess:/var/www/html/.htaccess
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     depends_on:
       - db
-    environment:
-      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD:-Averylongpasswordtochange}"
     volumes:
      - /sessions
 
