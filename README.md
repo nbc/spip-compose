@@ -5,6 +5,12 @@ développement* pour spip 3.2 avec une base mariadb 10.5.
 
 Les commandes de bases :
 
+Copiez le fichier .env.example vers .env :
+```
+cp .env.example .env
+```
+Et configurez le
+
 ## Démarrer l'environnement :
 ```
 docker-compose up -d
