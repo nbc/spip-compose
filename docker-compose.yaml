@@ -21,9 +21,9 @@ services:
       SPIP_DB_PASS: "${SPIP_DB_PASS:-changez_moi}"
 
       SPIP_ADMIN_PASS: "${SPIP_ADMIN_PASS:-changez_moi}"
-      SPIP_ADMIN_NAME: "${SPIP_ADMIN_NAME:-Admin}"
-      SPIP_ADMIN_LOGIN: "${SPIP_ADMIN_LOGIN:-admin}"
-      SPIP_ADMIN_EMAIL: "${SPIP_ADMIN_EMAIL:-admin@spip}"
+      SPIP_ADMIN_NAME: "${SPIP_ADMIN_NAME:-Spip}"
+      SPIP_ADMIN_LOGIN: "${SPIP_ADMIN_LOGIN:-spip}"
+      SPIP_ADMIN_EMAIL: "${SPIP_ADMIN_EMAIL:-spip@spip}"
     volumes:
       - ./mounts/IMG:/var/www/html/IMG/
       - ./mounts/plugins/:/var/www/html/plugins/
