@@ -11,7 +11,7 @@ services:
       - mariadb:/var/lib/mysql
 
   spip:
-    image: ipeos/spip:3.2
+    build: ./spip
     depends_on:
       - db
     environment:
