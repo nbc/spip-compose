@@ -25,12 +25,12 @@ services:
       SPIP_ADMIN_LOGIN: "${SPIP_ADMIN_LOGIN:-spip}"
       SPIP_ADMIN_EMAIL: "${SPIP_ADMIN_EMAIL:-spip@spip}"
     volumes:
-      - ./mounts/IMG:/var/www/html/IMG/
-      - ./mounts/plugins/:/var/www/html/plugins/
-      - ./mounts/lib/:/var/www/html/lib/
-      - ./mounts/tmp/:/var/www/html/tmp/
-      - ./mounts/local/:/var/www/html/local/
-      - ./mounts/htaccess:/var/www/html/.htaccess
+      - ${MOUNTS:-./mounts}/IMG:/var/www/html/IMG/
+      - ${MOUNTS:-./mounts}/plugins/:/var/www/html/plugins/
+      - ${MOUNTS:-./mounts}/lib/:/var/www/html/lib/
+      - ${MOUNTS:-./mounts}/tmp/:/var/www/html/tmp/
+      - ${MOUNTS:-./mounts}/local/:/var/www/html/local/
+      - ${MOUNTS:-./mounts}/htaccess:/var/www/html/.htaccess
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
