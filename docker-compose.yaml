@@ -30,7 +30,7 @@ services:
       - ${MOUNTS:-./mounts}/lib/:/var/www/html/lib/
       - ${MOUNTS:-./mounts}/tmp/:/var/www/html/tmp/
       - ${MOUNTS:-./mounts}/local/:/var/www/html/local/
-      - ${MOUNTS:-./mounts}/htaccess:/var/www/html/.htaccess
+      - ${MOUNTS:-./mounts}/htaccess.txt:/var/www/html/.htaccess
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
