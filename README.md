@@ -32,12 +32,24 @@ docker volume rm spip-compose_mariadb
 * SPIP est disponible sur localhost:8080
 * phpmyadmin sur localhost:8090
 
-# Démarrage d'un environnement en production
+# Utilisation d'un environnement de "production"
 
+Pour utiliser cet environnement vous devez avoir un container traefik
+actif. Vous pouvez utiliser https://github.com/nbc/traefik-compose qui
+préconfigure le strict nécessaire.
 
+Copiez le fichier .env.example vers .env et configurer le.
+
+## démarrer
 
 ```
-docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml down
+docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d
+```
+
+## arrêter
+
+```
+docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d
 ```
 
 # configurer l'environnement
