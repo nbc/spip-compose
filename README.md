@@ -54,14 +54,28 @@ docker-compose -f docker-compose.yaml -f docker-compose.prod.yaml up -d
 
 # configurer l'environnement
 
+## mot de passe
+
 Par défaut l'environnement est disponible sur l'url
 http://localhost:8080. Le login administrateur est `admin` et le mot
-de passe `adminadmin`.
+de passe `changez_moi`.
 
 Si vous comptez ouvrir cet environnement sur internet, copiez le
 fichier `.env.example` vers `.env` et modifiez au moins la variable :
-* `SPIP_ADMIN_PASS`
+* `SPIP_DB_PASS`
 
+## emplacement des fichiers SPIP
+
+Si vous souhaitez mettre les fichiers SPIP dans un autre répertoire,
+renseignez la variable MOUNTS :
+```
+MOUNTS=/un/autre/chemin/projet
+```
+et copiez le répertoire mounts à cet endroit :
+
+```
+sudo cp -r mounts /un/autre/chemin/projet
+```
 
 # Références
 
