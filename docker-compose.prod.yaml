@@ -8,13 +8,13 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.spip.rule=Host(`${COMPOSE_PROJECT_NAME:-spip}.${DOMAIN_NAME:-recette.tech}`)"
-      - "traefik.http.routers.spip.entrypoints=https"
-      - "traefik.http.routers.spip.service=spip"
-      - "traefik.http.services.spip.loadbalancer.server.port=80"
+      - "traefik.http.routers.spip-${COMPOSE_PROJECT_NAME:?err}.rule=Host(`${COMPOSE_PROJECT_NAME}.${DOMAIN_NAME:-recette.tech}`)"
+      - "traefik.http.routers.spip-${COMPOSE_PROJECT_NAME}.entrypoints=https"
+      - "traefik.http.routers.spip-${COMPOSE_PROJECT_NAME}.service=spip-${COMPOSE_PROJECT_NAME}"
+      - "traefik.http.services.spip-${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=80"
       - "traefik.docker.network=${TRAEFIK_NETWORK}"
 
-      - "traefik.http.routers.spip.tls.certresolver=myresolver"
+      - "traefik.http.routers.spip-${COMPOSE_PROJECT_NAME}.tls.certresolver=myresolver"
 
   phpmyadmin:
     restart: always
@@ -23,13 +23,13 @@ services:
       - traefik
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.pma.rule=Host(`pma-${COMPOSE_PROJECT_NAME:-spip}.${DOMAIN_NAME:-recette.tech}`)"
-      - "traefik.http.routers.pma.entrypoints=https"
-      - "traefik.http.routers.pma.service=pma"
-      - "traefik.http.services.pma.loadbalancer.server.port=80"
+      - "traefik.http.routers.pma-${COMPOSE_PROJECT_NAME}.rule=Host(`pma-${COMPOSE_PROJECT_NAME}.${DOMAIN_NAME:-recette.tech}`)"
+      - "traefik.http.routers.pma-${COMPOSE_PROJECT_NAME}.entrypoints=https"
+      - "traefik.http.routers.pma-${COMPOSE_PROJECT_NAME}.service=pma-${COMPOSE_PROJECT_NAME}"
+      - "traefik.http.services.pma-${COMPOSE_PROJECT_NAME}.loadbalancer.server.port=80"
       - "traefik.docker.network=${TRAEFIK_NETWORK}"
 
-      - "traefik.http.routers.pma.tls.certresolver=myresolver"
+      - "traefik.http.routers.pma-${COMPOSE_PROJECT_NAME}.tls.certresolver=myresolver"
 
   db:
     networks:
