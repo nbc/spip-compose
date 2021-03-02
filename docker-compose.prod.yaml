@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   spip:
-    restart: always
+    restart: unless-stopped
     networks:
       - db
       - traefik
@@ -17,7 +17,7 @@ services:
       - "traefik.http.routers.spip-${COMPOSE_PROJECT_NAME}.tls.certresolver=myresolver"
 
   phpmyadmin:
-    restart: always
+    restart: unless-stopped
     networks:
       - db
       - traefik
@@ -32,6 +32,7 @@ services:
       - "traefik.http.routers.pma-${COMPOSE_PROJECT_NAME}.tls.certresolver=myresolver"
 
   db:
+    restart: unless-stopped
     networks:
       - db
 
