@@ -36,6 +36,8 @@ services:
     image: phpmyadmin/phpmyadmin
     depends_on:
       - db
+    environment:
+      UPLOAD_LIMIT: ${UPLOAD_LIMIT:-40M}
     volumes:
      - /sessions
 
