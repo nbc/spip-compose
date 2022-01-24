@@ -39,7 +39,7 @@ services:
     depends_on:
       - db
     environment:
-      UPLOAD_LIMIT: ${UPLOAD_LIMIT:-2M}
+      UPLOAD_LIMIT: ${UPLOAD_LIMIT:-40M}
     volumes:
      - /sessions
 
