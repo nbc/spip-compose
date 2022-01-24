@@ -1,4 +1,4 @@
-FROM ipeos/spip:3.2
+FROM ipeos/spip:3.2.12
 
 COPY ./start.sh /
 
